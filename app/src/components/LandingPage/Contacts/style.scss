@@ -1,0 +1,67 @@
+@import "../../../assets/styles/__settings.scss";
+
+.contacts-wrapper {
+    @include grid();
+    gap: 50px;
+    padding: 50px 150px;
+    background-color: $light;
+    color: $dark;
+
+    .left {
+        .info-section {
+            margin: 40px 0;
+
+            p {
+                color: $dark;
+            }
+        }
+    }
+
+    .right {
+        form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #f0f0f0;
+    
+            input,
+            textarea,
+            button {
+                width: 100%;
+                padding: 15px 20px;
+                margin-bottom: 10px;
+                border-radius: 15px;
+                border: 1px solid #ccc;
+                outline: none;
+                transition: all 0.3s ease;
+                font-size: 16px;
+                font-family: 'Arial', sans-serif;
+                background-color: #fff;
+    
+                &:focus {
+                    border-color: #f9a826;
+                    box-shadow: 0 0 10px rgba(249, 168, 38, 0.5);
+                }
+            }
+    
+            textarea {
+                height: 150px;
+                resize: none;
+                overflow: hidden;
+            }
+    
+            button {
+                font-weight: bold;
+                color: #fff;
+                background-color: #f9a826;
+                cursor: pointer;
+    
+                &:hover {
+                    background-color: darken(#f9a826, 10%);
+                }
+            }
+        }
+    }
+    
+}

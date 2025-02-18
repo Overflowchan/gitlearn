@@ -1,0 +1,46 @@
+@import "../../../assets/styles/__settings.scss"; // Подключение настроек
+
+.career-wrapper {
+    background-color: $light;
+    color: $dark;
+
+    .career-section {
+        padding: 50px 150px;
+
+        .four-divs {
+            margin: 50px 0;
+            @include grid; // Использование миксина grid из __settings.scss
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 50px;
+
+            .value {
+                position: relative;
+                padding: 0 10px 10px 100px;
+                width: 100%; // Добавлено для полной ширины блоков
+
+                img {
+                    position: absolute;
+                    left: -10px;
+                    top: -20px;
+                    width: 80px; // Ширина и высота изображения
+                    height: 80px;
+                    border-radius: 50%; // Скругление углов для круглой формы
+                }
+
+                .right-info {
+                    padding-left: 30px; // Добавлено для корректного отступа текста
+
+                    h2 {
+                        margin-top: 0; // Убран верхний отступ у заголовка
+                    }
+
+                    p {
+                        color: $dark;
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
