@@ -6,7 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print chtochto
-        run: sudo apt install traceroute 
-      - name: tc
-        run: traceroute 1.1.1.1
+        run: ping -c 10 1.1.1.1
 
