@@ -1,8 +1,20 @@
 name: Test React App
 on: push
 jobs:
-  
+  test-my-react:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: install dependencies
+        run: npm install
+      - name: run tests
+        run: npm test  
+      - name:
+        run: npm run lint
+
   build:
+    needs: test-my-react
     runs-on: ubuntu-latest
     steps:
       - name: Get code
