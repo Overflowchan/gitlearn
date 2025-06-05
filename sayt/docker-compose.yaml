@@ -3,7 +3,7 @@ name: php-app
 services:
   web:
     restart: always
-    image: php-app:lastest
+    image: primeaph/php-app:lastest
     depends_on:
       - sql
     ports:

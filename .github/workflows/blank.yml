@@ -49,7 +49,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        cd /home/chan/sayt
+        cd /sayt
         docker compose build 
     - name: Push Docker image
       run: |
