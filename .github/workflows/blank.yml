@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.PORT }}
-        source: "./"               
+        source: "./sayt"               
         target: "/home/chan"   
 
     - name: Run remote deploy commands
@@ -36,6 +36,7 @@ jobs:
           # npm install
           # npm run build
           # или перезапуск сервера
+          cd /home/chan/sayt
           docker compose down -v 
           docker compose up -d --build
   build-and-push:
