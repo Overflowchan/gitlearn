@@ -49,8 +49,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        cd /sayt
-        docker compose build 
+        ls
     - name: Push Docker image
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/php-app:latest
