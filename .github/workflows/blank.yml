@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main   # деплойим при пуше в main (можно изменить)
+      - main   
 
 jobs:
   deploy:
