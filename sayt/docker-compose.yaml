@@ -1,9 +1,10 @@
 version: '3.8'
-name: php-app
+
 services:
   web:
     restart: always
-    image: primeaph/php-app:1
+    build: ./client
+    image: primeaph/php-app:latest
     depends_on:
       - sql
     ports:
