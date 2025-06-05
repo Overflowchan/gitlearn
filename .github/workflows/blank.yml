@@ -1,0 +1,59 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main   # деплойим при пуше в main (можно изменить)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy files to server via SSH
+      uses: appleboy/scp-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "./"               # что копировать — текущую папку
+        target: "/var/www/html"    # куда копировать на сервере
+
+    - name: Run remote deploy commands
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: ${{ secrets.SERVER_SSH_PORT }}
+        script: |
+          cd /var/www/html
+          # например, если есть сборка
+          # npm install
+          # npm run build
+          # или перезапуск сервера
+          sudo systemctl restart apache2
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/php-app:latest .
+
+    - name: Push Docker image
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/php-app:latest
