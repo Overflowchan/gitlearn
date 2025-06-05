@@ -12,6 +12,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      - name: Debug SSH access
+      run: |
+        echo "${{ secrets.SSH_KEY }}" > id_rsa
+        chmod 600 id_rsa
+        ssh -o StrictHostKeyChecking=no -i id_rsa ${{ secrets.USER }}@${{ secrets.HOST }} "echo connected!"
 
     - name: Deploy files to server via SSH
       uses: appleboy/scp-action@v1
