@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    restart: always
+    image: php-app:lastest
+    depends_on:
+      - sql
+    ports:
+      - "80:80"
+
+    
+  sql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./ByteBazaar.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: strongpass
+      MYSQL_DATABASE: project
+      MYSQL_USER: chan
+      MYSQL_PASSWORD: kuchlipass
+
+volumes:
+  db_data:
+
+
+
