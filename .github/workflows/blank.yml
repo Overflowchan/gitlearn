@@ -18,25 +18,26 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
-        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.PORT }}
-        source: "./"               # что копировать — текущую папку
-        target: "/var/www/html"    # куда копировать на сервере
+        source: "./"               
+        target: "/home/chan"   
 
     - name: Run remote deploy commands
       uses: appleboy/ssh-action@v0.1.7
       with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        port: ${{ secrets.SERVER_SSH_PORT }}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.PORT }}
         script: |
-          cd /var/www/html
+
           # например, если есть сборка
           # npm install
           # npm run build
           # или перезапуск сервера
-          sudo systemctl restart apache2
+          docker compose down -v 
+          docker compose up -d --build
   build-and-push:
     runs-on: ubuntu-latest
 
